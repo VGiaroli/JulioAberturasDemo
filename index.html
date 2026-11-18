@@ -1,13 +1,75 @@
-<!DOCTYPE html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Gestión de Aberturas – Prototipo</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-<link href="styles.css" rel="stylesheet"></head>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Gestión de trabajos, despiece y optimización de cortes para Julio Aberturas.">
+  <title>Julio Aberturas | Sistema de fabricación</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
 <body>
-<aside id="side"><div class="brand"><i class="bi bi-grid-3x3-gap-fill"></i> AberturasPro<small>Prototipo</small></div><nav id="nav"></nav></aside>
-<main><header class="top"><h5 id="title" class="m-0"></h5><div class="d-flex align-items-center gap-3"><button class="btn btn-sm btn-outline-secondary" onclick="resetDemo()"><i class="bi bi-arrow-counterclockwise"></i> Restaurar demo</button><span class="user"><i class="bi bi-person-circle"></i> Admin</span></div></header>
-<section id="view" class="p-4"></section></main>
-<div class="modal fade" id="m" tabindex="-1"><div class="modal-dialog modal-xl modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h6 class="modal-title" id="mt"></h6><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body" id="mb"></div><div class="modal-footer" id="mf"></div></div></div></div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="app.js"></script></body></html>
+  <aside id="side" class="sidebar">
+    <div class="brand">
+      <div class="brand-icon" aria-hidden="true">JA</div>
+      <div class="brand-copy">
+        <strong>Julio Aberturas</strong>
+        <small>Sistema de fabricación</small>
+      </div>
+    </div>
+
+    <div class="nav-label">GESTIÓN DEL TALLER</div>
+    <nav id="nav" aria-label="Navegación principal"></nav>
+
+    <div class="side-footer">
+      <div class="side-setting">
+        <label for="kerfSetting">Disco de sierra</label>
+        <div><input id="kerfSetting" type="number" min="0" max="20" step="0.5" value="3"><span>mm</span></div>
+      </div>
+      <div class="side-setting">
+        <label for="recoverSetting">Sobrante mínimo</label>
+        <div><input id="recoverSetting" type="number" min="0" max="5000" step="10" value="500"><span>mm</span></div>
+      </div>
+      <p class="side-note">Los valores se pueden ajustar según las herramientas y criterios del taller.</p>
+    </div>
+  </aside>
+
+  <main class="main-shell">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button id="menuToggle" class="icon-button menu-toggle" type="button" aria-label="Abrir menú">☰</button>
+        <div>
+          <div class="eyebrow">JULIO ABERTURAS</div>
+          <h1 id="title">Panel de taller</h1>
+        </div>
+        <span class="line-tag">Delta Plus · Alsafex</span>
+      </div>
+      <div class="topbar-right">
+        <button id="exportButton" class="button button-quiet" type="button">↧ <span>Exportar copia</span></button>
+        <label class="button button-quiet import-label" for="importFile">↥ <span>Importar</span></label>
+        <input id="importFile" type="file" accept="application/json,.json" hidden>
+        <div class="user-chip"><span class="user-dot"></span> Oficina Técnica</div>
+      </div>
+    </header>
+
+    <section id="view" class="view" aria-live="polite"></section>
+    <footer class="app-footer">
+      <span>Julio Aberturas · Gestión de fabricación</span>
+      <span>Versión inicial · Datos guardados en este navegador</span>
+    </footer>
+  </main>
+
+  <dialog id="dialog" class="dialog">
+    <div class="dialog-head">
+      <div>
+        <div class="eyebrow">JULIO ABERTURAS</div>
+        <h2 id="dialogTitle">Detalle</h2>
+      </div>
+      <button id="dialogClose" class="icon-button" type="button" aria-label="Cerrar">×</button>
+    </div>
+    <div id="dialogBody" class="dialog-body"></div>
+    <div id="dialogFooter" class="dialog-footer"></div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
